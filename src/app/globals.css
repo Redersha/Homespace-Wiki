@@ -1,26 +1,320 @@
 @import "tailwindcss";
 
+/* class 策略暗色模式（Tailwind v4 CSS-first） */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============ 设计 Token ============
+ * 视觉方向：暗工业废土为底 + 高饱和游戏风点缀
+ * 规则：全站直角（无圆角），仅浮层阴影；hover 用能量条 / 边缘发光
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* 中性色阶（浅色：冷工业灰） */
+  --color-bg-base: #f2f3f6;
+  --color-bg-surface: #ffffff;
+  --color-bg-muted: #eceef2;
+  --color-bg-elevated: #ffffff;
+  --color-border: #dcdfe4;
+  --color-border-strong: #b8bdc6;
+
+  /* 文本色阶 */
+  --color-text-base: #1c1e23;
+  --color-text-secondary: #3f444d;
+  --color-text-muted: #6a707a;
+  --color-text-inverse: #ffffff;
+  --color-text-link: #3b6f9e;
+
+  /* 主色：水泥灰蓝 */
+  --color-primary: #4d6275;
+  --color-primary-hover: #3d5263;
+  --color-primary-active: #31434f;
+  --color-primary-light: #e8ecf0;
+
+  /* 点缀橙（游戏风主点缀） */
+  --color-accent: #ff6b1a;
+  --color-accent-hover: #e85d0f;
+  /* 顶栏主题色（与 theme-color meta 一致） */
+  --color-topnav: #c2410c;
+
+  /* 功能色（游戏风高饱和） */
+  --color-success: #16803c;
+  --color-warning: #c77700;
+  --color-danger: #d02e1e;
+  --color-info: #1f6fc4;
+
+  /* 浮层阴影 */
+  --fz-box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, 0.04),
+    0px 8px 20px rgba(0, 0, 0, 0.08);
+  --fz-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, 0.12);
+  --fz-box-shadow-lighter: 0px 0px 6px rgba(0, 0, 0, 0.12);
+  --fz-box-shadow-dark: 0px 16px 48px 16px rgba(0, 0, 0, 0.08),
+    0px 12px 32px rgba(0, 0, 0, 0.12), 0px 8px 16px -8px rgba(0, 0, 0, 0.16);
+
+  /* 字体族 */
+  --fz-font-family: "Noto Sans SC", "Helvetica Neue", Helvetica, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  --fz-font-mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* 暗色：工业废土基调 */
+.dark {
+  --color-bg-base: #0c0e13;
+  --color-bg-surface: #141720;
+  --color-bg-muted: #1b1f2a;
+  --color-bg-elevated: #1e232f;
+  --color-border: #262b37;
+  --color-border-strong: #363d4c;
+
+  --color-text-base: #e6e8ee;
+  --color-text-secondary: #a8afbc;
+  --color-text-muted: #767e8e;
+  --color-text-inverse: #0c0e13;
+  --color-text-link: #5f8fb3;
+
+  --color-primary: #6b8aa6;
+  --color-primary-hover: #7c9bb6;
+  --color-primary-active: #8facc4;
+  --color-primary-light: #232b35;
+
+  --color-accent: #ff7a1a;
+  --color-accent-hover: #ff8f3d;
+  /* 顶栏主题色（与 theme-color meta 一致） */
+  --color-topnav: #9a3412;
+
+  --color-success: #2ed573;
+  --color-warning: #f5b41a;
+  --color-danger: #ff4757;
+  --color-info: #4da6ff;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-base: var(--color-bg-base);
+  --color-surface: var(--color-bg-surface);
+  --color-muted: var(--color-bg-muted);
+  --color-elevated: var(--color-bg-elevated);
+  --color-line: var(--color-border);
+  --color-line-strong: var(--color-border-strong);
+
+  --color-content: var(--color-text-base);
+  --color-content-secondary: var(--color-text-secondary);
+  --color-content-muted: var(--color-text-muted);
+  --color-content-inverse: var(--color-text-inverse);
+  --color-link: var(--color-text-link);
+
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-primary-active: var(--color-primary-active);
+  --color-primary-light: var(--color-primary-light);
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+  --color-topnav: var(--color-topnav);
+
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-danger: var(--color-danger);
+  --color-info: var(--color-info);
+
+  --font-sans: var(--fz-font-family);
+  --font-mono: var(--fz-font-mono);
+
+  /* 字号阶梯（14px 正文基准） */
+  --text-xs: 12px;
+  --text-xs--line-height: 1.4;
+  --text-sm: 13px;
+  --text-sm--line-height: 1.5;
+  --text-base: 14px;
+  --text-base--line-height: 1.6;
+  --text-md: 16px;
+  --text-md--line-height: 1.5;
+  --text-lg: 18px;
+  --text-lg--line-height: 1.5;
+  --text-xl: 20px;
+  --text-xl--line-height: 1.4;
+
+  --tracking-tight: -0.01em;
+  --tracking-wide: 0.02em;
+
+  --shadow-fz: var(--fz-box-shadow);
+  --shadow-fz-light: var(--fz-box-shadow-light);
+  --shadow-fz-lighter: var(--fz-box-shadow-lighter);
+  --shadow-fz-dark: var(--fz-box-shadow-dark);
+
+  --container-content: 1280px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============ 基础 ============ */
+html {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg-base);
+  color: var(--color-text-base);
+  font-family: var(--fz-font-family);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-text-inverse);
+}
+
+/* 数字表格对齐 */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 工业切角（clip-path 去掉右上角，强化硬边质感） */
+.clip-corner {
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+}
+
+/* hover 能量条：左侧橙色竖条（列表/卡片通用） */
+.energy-left {
+  position: relative;
+}
+.energy-left::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: var(--color-accent);
+  opacity: 0;
+  transform: scaleY(0.4);
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+.energy-left:hover::before,
+.energy-left.is-active::before {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+/* 右侧渐变光 hover：从右侧边缘亮起、向左渐变的同色高亮
+ * 颜色由 --energy-color 控制（默认 accent），与元素同高 */
+.energy-right {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.energy-right::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    to left,
+    var(--energy-color, var(--color-accent)) 0%,
+    transparent 75%
+  );
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 180ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 180ms ease;
+  pointer-events: none;
+}
+.energy-right:hover::after {
+  opacity: 0.22;
+  transform: scaleX(1);
+}
+
+/* 左侧固定高亮条（卡片标识，颜色由 --energy-color 控制，始终显示） */
+.energy-bar-left {
+  position: relative;
+}
+.energy-bar-left::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  z-index: 1;
+  background-color: var(--energy-color, var(--color-accent));
+}
+
+/* 侧边栏滑动选中指示条 */
+.nav-indicator {
+  position: absolute;
+  left: 12px;
+  width: 3px;
+  background-color: var(--color-accent);
+  opacity: 0;
+  transition: top 200ms cubic-bezier(0.4, 0, 0.2, 1), opacity 150ms ease;
+  pointer-events: none;
+}
+.nav-indicator.is-visible {
+  opacity: 1;
+}
+
+/* 竖线纹路：竖向线条只覆盖右侧约 35%，从右到左逐渐变细（右粗左细且密集）
+ * 颜色由 --energy-color 控制；选中态从右侧滑入 + 渐入 */
+.hachure {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-color: var(--energy-color, var(--color-accent));
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Crect x='97' y='0' width='3' height='100' fill='white'/%3E%3Crect x='94' y='0' width='2.7' height='100' fill='white'/%3E%3Crect x='91' y='0' width='2.4' height='100' fill='white'/%3E%3Crect x='88.5' y='0' width='2.1' height='100' fill='white'/%3E%3Crect x='86' y='0' width='1.9' height='100' fill='white'/%3E%3Crect x='83.5' y='0' width='1.7' height='100' fill='white'/%3E%3Crect x='81' y='0' width='1.5' height='100' fill='white'/%3E%3Crect x='78.7' y='0' width='1.3' height='100' fill='white'/%3E%3Crect x='76.5' y='0' width='1.1' height='100' fill='white'/%3E%3Crect x='74.3' y='0' width='0.9' height='100' fill='white'/%3E%3Crect x='72.2' y='0' width='0.8' height='100' fill='white'/%3E%3Crect x='70.2' y='0' width='0.7' height='100' fill='white'/%3E%3Crect x='68.3' y='0' width='0.6' height='100' fill='white'/%3E%3Crect x='66.5' y='0' width='0.5' height='100' fill='white'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Crect x='97' y='0' width='3' height='100' fill='white'/%3E%3Crect x='94' y='0' width='2.7' height='100' fill='white'/%3E%3Crect x='91' y='0' width='2.4' height='100' fill='white'/%3E%3Crect x='88.5' y='0' width='2.1' height='100' fill='white'/%3E%3Crect x='86' y='0' width='1.9' height='100' fill='white'/%3E%3Crect x='83.5' y='0' width='1.7' height='100' fill='white'/%3E%3Crect x='81' y='0' width='1.5' height='100' fill='white'/%3E%3Crect x='78.7' y='0' width='1.3' height='100' fill='white'/%3E%3Crect x='76.5' y='0' width='1.1' height='100' fill='white'/%3E%3Crect x='74.3' y='0' width='0.9' height='100' fill='white'/%3E%3Crect x='72.2' y='0' width='0.8' height='100' fill='white'/%3E%3Crect x='70.2' y='0' width='0.7' height='100' fill='white'/%3E%3Crect x='68.3' y='0' width='0.6' height='100' fill='white'/%3E%3Crect x='66.5' y='0' width='0.5' height='100' fill='white'/%3E%3C/svg%3E");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1), opacity 250ms ease;
+  pointer-events: none;
+}
+.hachure.is-visible {
+  opacity: 0.55;
+  transform: translateX(0);
+}
+
+/* 移动端抽屉动画（渐入渐出） */
+@keyframes fz-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes fz-overlay-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes fz-drawer-in {
+  from { opacity: 0; transform: translateX(-100%); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes fz-drawer-out {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(-100%); }
+}
+.fz-drawer-overlay[data-state="open"] {
+  animation: fz-overlay-in 200ms ease;
+}
+.fz-drawer-overlay[data-state="closed"] {
+  animation: fz-overlay-out 180ms ease;
+}
+.fz-drawer-content[data-state="open"] {
+  animation: fz-drawer-in 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fz-drawer-content[data-state="closed"] {
+  animation: fz-drawer-out 180ms ease;
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-border-strong);
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
 }
