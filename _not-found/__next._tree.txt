@@ -1,0 +1,3 @@
+:HL["/Homespace-Wiki/_next/static/chunks/3pbumo67hv58o.css","style"]
+:HL["/Homespace-Wiki/_next/static/chunks/3g1--ev3ptsn0.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"srSKM04wPQSpI2agY3q-2"}
