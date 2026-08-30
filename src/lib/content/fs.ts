@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import matter from "gray-matter";
-import type { Category, ContentNode, ContentProvider } from "./types";
+import type { Category, ContentNode, ContentProvider, SearchEntry } from "./types";
 
 /** Markdown 内容根目录（后续接 Git 仓库时只需指向 clone 目录） */
 const CONTENT_DIR = join(process.cwd(), "content");
@@ -105,6 +105,26 @@ function walk(relDir: string): { nodes: ContentNode[] } {
 
 function flatten(nodes: ContentNode[]): ContentNode[] {
   return nodes.flatMap((n) => [n, ...flatten(n.children ?? [])]);
+}
+
+/** 同步读取全量内容（供服务端组件 / 静态导出使用） */
+export function getAllNodesSync(): ContentNode[] {
+  const all = (Object.keys(CATEGORY_DIRS) as Category[]).flatMap(
+    (c) => walk(CATEGORY_DIRS[c]).nodes,
+  );
+  return flatten(all);
+}
+
+/** 构建搜索索引（仅叶子文章） */
+export function getSearchEntriesSync(): SearchEntry[] {
+  return getAllNodesSync()
+    .filter((n) => !n.isSection)
+    .map((n) => ({
+      title: n.title,
+      slug: n.slug,
+      category: n.category,
+      excerpt: n.excerpt,
+    }));
 }
 
 /** 文件系统内容源（服务器端专用） */

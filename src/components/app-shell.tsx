@@ -5,14 +5,21 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 import { TopNav } from "./top-nav";
 import { Sidebar } from "./sidebar";
+import type { SearchEntry } from "@/lib/content/types";
 
 /** 整体应用外壳：顶栏 + 侧边栏（桌面固定 / 移动抽屉） */
-export function AppShell({ children }: { children: React.ReactNode }) {
+export function AppShell({
+  children,
+  searchEntries,
+}: {
+  children: React.ReactNode;
+  searchEntries: SearchEntry[];
+}) {
   const [open, setOpen] = useState(false);
 
   return (
     <div className="flex min-h-screen flex-col bg-base">
-      <TopNav onMenuClick={() => setOpen(true)} />
+      <TopNav onMenuClick={() => setOpen(true)} searchEntries={searchEntries} />
 
       <div className="flex flex-1">
         {/* 桌面侧边栏 */}

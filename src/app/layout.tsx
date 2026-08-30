@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { Noto_Sans_SC, JetBrains_Mono } from "next/font/google";
 import { AppShell } from "@/components/app-shell";
+import { getSearchEntriesSync } from "@/lib/content/fs";
 import "./globals.css";
 
 const notoSans = Noto_Sans_SC({
@@ -23,7 +24,6 @@ export const metadata: Metadata = {
   description: "还没写",
 };
 
-/** 内联脚本：读取 localStorage 或系统偏好，避免深色模式闪烁 */
 const themeInitScript = `
 (function(){
   try {
@@ -49,7 +49,7 @@ export default function RootLayout({
       <body
         className={`${notoSans.variable} ${jetbrainsMono.variable} min-h-screen bg-base text-content font-sans antialiased`}
       >
-        <AppShell>{children}</AppShell>
+        <AppShell searchEntries={getSearchEntriesSync()}>{children}</AppShell>
       </body>
     </html>
   );

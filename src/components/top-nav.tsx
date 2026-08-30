@@ -2,10 +2,17 @@
 
 import Link from "next/link";
 import { Menu, Search, Bell, ExternalLink } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { ThemeToggle } from "./theme-toggle";
+import { SearchBox } from "./search-box";
+import type { SearchEntry } from "@/lib/content/types";
 
-export function TopNav({ onMenuClick }: { onMenuClick?: () => void }) {
+export function TopNav({
+  onMenuClick,
+  searchEntries,
+}: {
+  onMenuClick?: () => void;
+  searchEntries: SearchEntry[];
+}) {
   return (
     <header className="sticky top-0 z-[1000] relative flex h-14 items-center gap-4 border-b border-topnav bg-topnav px-4">
       {/* 移动端抽屉按钮 */}
@@ -23,25 +30,9 @@ export function TopNav({ onMenuClick }: { onMenuClick?: () => void }) {
         <span>[中文名] WIKI</span>
       </Link>
 
-      {/* 搜索框（桌面，居中） */}
-      <div className="absolute left-1/2 top-1/2 hidden w-64 -translate-x-1/2 -translate-y-1/2 sm:block">
-        <Search
-          size={16}
-          className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-white/60"
-        />
-        <input
-          type="search"
-          placeholder="搜索条目…"
-          className={cn(
-            "h-8 w-full border border-white/20 bg-white/10 pl-8 pr-3 text-sm text-white",
-            "placeholder:text-white/50",
-            "focus:border-white/40 focus:outline-none focus:ring-2 focus:ring-white/30",
-          )}
-        />
-      </div>
-
       {/* 右侧图标组 */}
       <div className="ml-auto flex items-center gap-1">
+        {/* 移动端搜索按钮（点击后展开搜索，详见 SearchBox 移动端处理） */}
         <button
           type="button"
           aria-label="搜索"
@@ -50,6 +41,11 @@ export function TopNav({ onMenuClick }: { onMenuClick?: () => void }) {
         >
           <Search size={16} />
         </button>
+
+        {/* 搜索框（桌面，位于铃铛左边） */}
+        <SearchBox entries={searchEntries} />
+
+        {/* 公告 / 通知 */}
         <button
           type="button"
           aria-label="通知"
@@ -58,6 +54,7 @@ export function TopNav({ onMenuClick }: { onMenuClick?: () => void }) {
         >
           <Bell size={16} />
         </button>
+
         <a
           href="https://github.com"
           target="_blank"

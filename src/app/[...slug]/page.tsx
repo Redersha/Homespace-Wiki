@@ -79,7 +79,7 @@ export default async function ContentPage({
     const category = fullSlug as Category;
     const tree = await fsProvider.getTree(category);
     return (
-      <div className="mx-auto max-w-[1280px] px-4 py-8 md:px-8 md:py-10">
+      <div className="mx-auto max-w-[1280px] px-4 py-8 md:pl-6 md:pr-8 md:pt-3 md:pb-10">
           <Breadcrumb slug={slug} />
           <div className="mb-6 flex items-center gap-2">
             <span className="h-5 w-0.5 bg-accent" />
@@ -124,7 +124,7 @@ export default async function ContentPage({
       : undefined;
 
   return (
-    <div className="mx-auto max-w-[1280px] px-4 py-8 md:px-8 md:py-10">
+    <div className="mx-auto max-w-[1280px] px-4 py-8 md:pl-6 md:pr-8 md:pt-3 md:pb-10">
       <Breadcrumb slug={slug} />
 
       {/* 头部 */}
