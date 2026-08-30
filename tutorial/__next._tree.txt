@@ -1,5 +1,5 @@
 :HL["/Homespace-Wiki/_next/static/chunks/3pbumo67hv58o.css","style"]
-:HL["/Homespace-Wiki/_next/static/chunks/3g1--ev3ptsn0.css","style"]
+:HL["/Homespace-Wiki/_next/static/chunks/418iuf78ui7uu.css","style"]
 :HL["/Homespace-Wiki/_next/static/media/051742360c26797e-s.p.1bkzbscqrt8rl.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/Homespace-Wiki/_next/static/media/feb57b2dc8f29018-s.p.3qy4m29-cg3o4.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"slug","param":{"type":"c","key":"tutorial","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"srSKM04wPQSpI2agY3q-2"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"slug","param":{"type":"c","key":"tutorial","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"U5UbER5vxXyfkxBAHy_2F"}
