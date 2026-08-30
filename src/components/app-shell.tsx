@@ -29,7 +29,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
               {/* 抽屉顶部标题栏 */}
               <div className="flex h-14 shrink-0 items-center justify-between border-b border-line px-4">
-                <span className="text-md font-semibold text-content">HOMESPACE WIK</span>
+                <span className="text-md font-semibold text-content">HOMESPACE WIKI</span>
                 <Dialog.Close className="inline-flex h-8 w-8 items-center justify-center text-content-secondary transition-colors hover:bg-muted hover:text-content">
                   <X size={18} />
                 </Dialog.Close>

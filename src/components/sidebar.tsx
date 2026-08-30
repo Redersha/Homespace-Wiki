@@ -83,22 +83,9 @@ function NavList() {
 /** 底部废土纹理插画占位（design_doc 第六节：侧边栏底部地形纹理） */
 function WastelandTexture() {
   return (
-    <div
-      className="relative mt-auto h-24 overflow-hidden border-t border-line"
-      aria-hidden
-    >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,#4a4038_0,transparent_40%),radial-gradient(circle_at_80%_70%,#c8632a55_0,transparent_35%),radial-gradient(circle_at_50%_100%,#d4a01744_0,transparent_50%)] opacity-60" />
-      <div
-        className="absolute inset-x-0 bottom-0 h-12"
-        style={{
-          background:
-            "linear-gradient(160deg, var(--color-bg-surface) 60%, transparent 60%)",
-        }}
-      />
       <div className="absolute bottom-2 left-3 text-xs text-content-muted">
-        HOMESPACE ALL IN ONE
+        社区项目，且不代表最终品质
       </div>
-    </div>
   );
 }
 

@@ -20,7 +20,7 @@ export function TopNav({ onMenuClick }: { onMenuClick?: () => void }) {
 
       {/* Logo */}
       <Link href="/" className="flex items-center gap-2 font-semibold text-md tracking-tight text-white">
-        <span>[游戏中文名] WIKI</span>
+        <span>[中文名] WIKI</span>
       </Link>
 
       {/* 搜索框（桌面，居中） */}

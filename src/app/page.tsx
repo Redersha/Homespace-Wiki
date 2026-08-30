@@ -13,7 +13,7 @@ export default function Home() {
           </p>
         </div>
           <h1 className="mt-3 text-3xl font-bold leading-tight tracking-tight text-content md:text-5xl">
-            [游戏中文名] WIKI
+            [中文名] WIKI
           </h1>
         <p className="mt-2 max-w-2xl text-sm text-content-secondary">
           还没想好

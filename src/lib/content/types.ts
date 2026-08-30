@@ -35,6 +35,14 @@ export interface ContentNode extends ContentMeta {
   children?: ContentNode[];
 }
 
+/** 用于前端搜索的精简条目 */
+export interface SearchEntry {
+  title: string;
+  slug: string;
+  category: Category;
+  excerpt?: string;
+}
+
 /** 内容源抽象：构建时同步拉取 + 解析 */
 export interface ContentProvider {
   getTree(category: Category): Promise<ContentNode[]>;
