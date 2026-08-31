@@ -3,7 +3,7 @@ import { Updates } from "@/components/home/updates";
 
 export default function Home() {
   return (
-    <div className="mx-auto max-w-[1280px] px-4 py-8 md:pl-6 md:pr-8 md:pt-3 md:pb-10">
+    <div className="mx-auto max-w-[1280px] px-4 py-8 md:pl-3 md:pr-8 md:pt-3 md:pb-10">
       {/* Hero */}
       <section className="mb-8 border border-line bg-surface px-6 py-6 md:px-8 md:py-8">
         <div className="flex items-center gap-2">
